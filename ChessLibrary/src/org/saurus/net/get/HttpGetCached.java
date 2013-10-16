@@ -51,7 +51,8 @@ public abstract class HttpGetCached<T> {
 			urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setUseCaches(true);
 			if (lastModified != null) {
-				//urlConnection.addRequestProperty("Cache-Control", "max-stale=" + 120);
+				// urlConnection.addRequestProperty("Cache-Control",
+				// "max-stale=" + 120);
 				urlConnection.addRequestProperty("If-Modified-Since", lastModified);
 			}
 
@@ -61,7 +62,7 @@ public abstract class HttpGetCached<T> {
 				Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 				String newLastModified = urlConnection.getHeaderField("Last-Modified");
 				HttpGetCached<T> newcachedData = convert(reader, newLastModified);
-				
+
 				log("HTTP_OK: previous LastModified: " + lastModified + ", current: " + newLastModified + ", new data "
 						+ ((newcachedData == null) ? "NOT FOUND" : "found"));
 				return newcachedData;
@@ -72,7 +73,7 @@ public abstract class HttpGetCached<T> {
 			}
 			return null;
 		} catch (IOException e) {
-			e.printStackTrace();
+			log("got IOException...");
 			return null;
 		} finally {
 			if (urlConnection != null)
