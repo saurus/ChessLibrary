@@ -5,6 +5,15 @@ import java.util.List;
 
 import org.saurus.chess.pgn.Move.CastleType;
 
+/**
+ * Chess Board rappresentation.
+ * 
+ * right now is implemented in the most straightforward way: as bidirectional
+ * array.
+ * 
+ * @author sauro
+ * 
+ */
 public class Board {
 	Piece[][] pieces;
 	int plyCount;
@@ -67,8 +76,15 @@ public class Board {
 		return cells;
 	}
 
+	/**
+	 * Get a simple board rappresentation. used mostly for debugging
+	 * 
+	 * @param addLabels
+	 *            add labels to files and ranks (a-h and 1-8)
+	 * @return
+	 */
 	public String[] dump(boolean addLabels) {
-		int size = addLabels?10:8;
+		int size = addLabels ? 10 : 8;
 		String[] b = new String[size];
 
 		for (int rank = 0; rank < 8; rank++) {
@@ -95,5 +111,4 @@ public class Board {
 
 		return b;
 	}
-
 }
